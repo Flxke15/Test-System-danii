@@ -1,27 +1,4 @@
 <template>
-  <div class="stars-container">
-    <div
-      v-for="(star, index) in staticStars"
-      :key="'static-' + index"
-      class="static-star"
-      :style="{
-        top: star.top,
-        left: star.left,
-        width: star.size,
-        height: star.size,
-        '--twinkle-duration': star.duration,
-        animationDelay: star.delay,
-      }"
-    ></div>
-  </div>
-  <div class="night">
-    <div
-      v-for="n in 15"
-      :key="n"
-      class="shooting-star"
-      :style="getStarStyle()"
-    ></div>
-  </div>
   <v-main v-if="route.name != 'Login'">
     <Navigation />
     <v-container class="pa-8" fluid>
@@ -30,6 +7,29 @@
     <AppFooter />
   </v-main>
   <v-main v-else>
+    <div class="stars-container">
+      <div
+        v-for="(star, index) in staticStars"
+        :key="'static-' + index"
+        class="static-star"
+        :style="{
+          top: star.top,
+          left: star.left,
+          width: star.size,
+          height: star.size,
+          '--twinkle-duration': star.duration,
+          animationDelay: star.delay,
+        }"
+      ></div>
+    </div>
+    <div class="night">
+      <div
+        v-for="n in 15"
+        :key="n"
+        class="shooting-star"
+        :style="getStarStyle()"
+      ></div>
+    </div>
     <router-view />
     <AppFooter />
   </v-main>

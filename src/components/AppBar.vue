@@ -28,10 +28,14 @@
 <script setup>
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@/stores/user'
+import { useLoadingStore } from '@/stores/loading'
+
 import { alert } from '@/helpers/alert'
+import { apiAuth } from '@/services'
 
 const router = useRouter()
 const userStore = useUserStore()
+const loadingStore = useLoadingStore()
 
 const systemName = process.env.APP_SYSTEM_NAME
 const listMenu = [
@@ -81,10 +85,26 @@ const logout = () => {
     showCancelButton: true,
     confirmButtonText: 'Yes, Logout!',
     cancelButtonText: 'Cancel',
-  }).then((result) => {
+  }).then(async (result) => {
     if (result.isConfirmed) {
-      userStore.clearUser()
-      router.push({ name: 'Login' })
+      try {
+        loadingStore.showLoading()  
+        await apiAuth.logout()
+        userStore.clearUser()
+        router.push({ name: 'Login' })
+      } catch (error) {
+        console.log("🚀 ~ logout ~ error:", error)
+        alert({
+          icon: 'error',
+          title: 'Logout Failed',
+          text: error.response?.data?.message || 'Unable to logout. Please try again.',
+          confirmButtonText: 'Close',
+          showCancelButton: false
+        })
+      } finally {
+        loadingStore.hideLoading()
+      }
+      
     }
   })
 }

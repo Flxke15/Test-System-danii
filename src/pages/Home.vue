@@ -96,22 +96,6 @@
       </v-card-text>
     </v-card>
 
-    <v-card>
-      <p tabindex="0">สวัสดีครับ1</p>
-      <p tabindex="0">สวัสดีครับ2</p>
-      <p tabindex="0">สวัสดีครับ3</p>
-      <p tabindex="0">สวัสดีครับ4</p>
-      <p tabindex="0" @keydown.tab="onLastFieldTab">สวัสดีครับ5</p>
-<a href="http://www.google.com/" tabindex="1">Google</a>
-    </v-card>
-
-    <!-- แสดงข้อมูลที่กรอก -->
-    <!-- <v-card v-if="submitted" class="mx-auto mt-6" max-width="800">
-      <v-card-title class="text-h6">ข้อมูลที่กรอก</v-card-title>
-      <v-card-text>
-        <pre>{{ formData }}</pre>
-      </v-card-text>
-    </v-card> -->
   </v-container>
 </template>
 
